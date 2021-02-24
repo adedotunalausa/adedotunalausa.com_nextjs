@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100vw",
     maxWidth: "1440px",
     margin: "0 auto",
-    paddingLeft: "0.5rem",
+    padding: "0.5rem",
+    boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.06), 0 -1px 0 0 rgba(0, 0, 0, 0.08)",
     [theme.breakpoints.up('md')]: {
       paddingRight: "3.5rem",
       paddingLeft: "3.5rem"
@@ -139,9 +140,22 @@ const header = () => {
   return (
     <React.Fragment>
       <div className={classes.root}>
-        <AppBar position="static" className={classes.appBar}>
+        <AppBar position="fixed" className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
-            <img onClick={() => handleMenuClick('/')} className={classes.title} src="adedotun_logo.svg" alt="adedotun_logo" />
+            <Box style={{ display: "flex", alignItems: "center" }}>
+              <img
+                onClick={() => handleMenuClick('/')}
+                className={classes.title}
+                src="adedotun_logo.svg"
+                alt="adedotun_logo"
+              />
+              <Typography style={{
+                color: "#0062FF",
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                marginLeft: "0.5rem"
+              }}>Adedotun</Typography>
+            </Box>
             <div>
               {isMobile ? (
                 <Box>
