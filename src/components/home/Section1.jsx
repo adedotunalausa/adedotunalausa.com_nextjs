@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { FilledButton, UnfilledButton } from '../Button';
 
@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 2.5rem",
     margin: "3rem 0"
   },
+  image: {
+    width: "22rem"
+  }
 }))
 
 const Section1 = () => {
@@ -34,21 +37,31 @@ const Section1 = () => {
   return (
     <>
       <Box className={classes.textWrapper} >
-        <Typography className={classes.smallText}>
-          Hello, I'm Adedotun <span role="img" aria-label="wave">👋🏼</span>
-        </Typography>
-        <Typography className={classes.bigText}>
-          Software Engineer
-        </Typography>
-        <Typography className={classes.smallText} style={{ padding: "0 1rem" }}>
-          I build digital products that meets the expectations of
-          users, help businesses reach their goals and result
-          in an awesome user interaction
-        </Typography>
-        <Box className={classes.buttonWrapper}>
-          <FilledButton text="View my work" />
-          <UnfilledButton text="More about me" />
-        </Box>
+        <Grid container>
+          <Grid item item xs={12} sm={12} md={6} lg={6} xl={6}>
+            <Typography className={classes.smallText}>
+              Hello, I'm Adedotun <span role="img" aria-label="wave">👋🏼</span>
+            </Typography>
+            <Typography className={classes.bigText}>
+              Software Engineer
+            </Typography>
+            <Typography className={classes.smallText} style={{ padding: "0 1rem" }}>
+              I build digital products that meets the expectations of
+              users, help businesses reach their goals and result
+              in an awesome user interaction
+            </Typography>
+            <Box className={classes.buttonWrapper}>
+              <FilledButton text="View my work" />
+              <UnfilledButton text="More about me" />
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+            <img className={classes.image}
+              src="/images/Adedotun2.png"
+              alt="adedotun" />
+          </Grid>
+        </Grid>
       </Box>
     </>
   )
