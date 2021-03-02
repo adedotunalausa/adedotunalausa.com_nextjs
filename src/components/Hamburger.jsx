@@ -1,13 +1,12 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
-// import { NavLinks } from "./NavLinks"
 
 const StyledBurger = styled.div`
     width: 2rem;
     height: 2rem;
     position: fixed;
     top: 19px;
-    right: 25px;
+    right: 32px;
     display: none;
 
     @media (max-width: 768px) {

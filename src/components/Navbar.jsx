@@ -14,12 +14,12 @@ import {
   Typography,
 } from '@material-ui/core';
 import {
-  Menu,
   Close,
 } from '@material-ui/icons';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useRouter } from 'next/router';
 import Hamburger from './Hamburger';
+import { FilledButton } from './Button'
 
 //CSS Styles
 
@@ -31,10 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     background: "#ffffff",
-    width: "100vw",
     maxWidth: "1440px",
-    margin: "0 auto",
-    padding: "0.5rem",
+    padding: "0.5rem 1rem",
     boxShadow: "0 2px 4px 0 rgba(0, 0, 0, 0.06), 0 -1px 0 0 rgba(0, 0, 0, 0.08)",
     [theme.breakpoints.up('md')]: {
       paddingRight: "3.5rem",
@@ -52,80 +50,44 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
-  title: {
+  logoMobile: {
     width: "2rem",
-    cursor: "pointer"
+    marginRight: "0.5rem"
   },
-  menuItems2: {
+  logo: {
+    width: "8rem"
+  },
+  links: {
+    color: "#5B6E80",
+    fontWeight: 400,
+    lineHeight: "1.9rem",
+    fontSize: "1rem",
+    textTransform: "Capitalize",
     '& > *': {
       '&:hover': {
-        color: "#FF5C00"
+        color: "#0062FF"
       },
     },
-    [theme.breakpoints.up('sm')]: {
-      fontSize: "0.5rem",
-    },
+    // [theme.breakpoints.up('sm')]: {
+    //   fontSize: "0.5rem",
+    // },
     [theme.breakpoints.up('md')]: {
-      fontSize: "0.6rem",
+      fontSize: "0.9rem",
     },
-    [theme.breakpoints.up('lg')]: {
-      fontSize: "0.7rem",
-      marginRight: "0.6rem",
-      marginLeft: "0.6rem",
-    },
+    // [theme.breakpoints.up('lg')]: {
+    //   fontSize: "0.7rem",
+    //   marginRight: "0.6rem",
+    //   marginLeft: "0.6rem",
+    // },
   },
-  signUp: {
-    '& > *': {
-      '&:hover': {
-        color: "#FF5C00",
-      },
-    },
-    background: "#FF5C00",
-    color: "#ffffff",
-    [theme.breakpoints.up('sm')]: {
-      fontSize: "0.5rem",
-    },
-    [theme.breakpoints.up('md')]: {
-      fontSize: "0.6rem",
-    },
-    [theme.breakpoints.up('lg')]: {
-      fontSize: "0.7rem",
-      marginRight: "0.6rem",
-      marginLeft: "0.6rem",
-    },
-  }
 }));
-
-const menuItems2 = [
-  {
-    page: "ABOUT US",
-    pageUrl: "/about"
-  },
-  {
-    page: "STORIES",
-    pageUrl: "/testimonial"
-  },
-  {
-    page: "CONTACT",
-    pageUrl: "/contact"
-  },
-  // {
-  //   page: "LOGIN",
-  //   pageUrl: "/login"
-  // },
-]
-const signUp = [
-  {
-    page: "SIGN UP",
-    pageUrl: "/signup"
-  },
-]
 
 const header = () => {
   const router = useRouter()
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('xs'));
+  const isTabDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [toggle, setToggle] = useState(false)
 
@@ -141,83 +103,115 @@ const header = () => {
     <React.Fragment>
       <div className={classes.root}>
         <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar className={classes.toolbar}>
-            <Box style={{ display: "flex", alignItems: "center" }}>
-              <img
-                onClick={() => handleMenuClick('/')}
-                className={classes.title}
-                src="adedotun_logo.svg"
-                alt="adedotun_logo"
-              />
-              <Typography style={{
-                color: "#0062FF",
-                fontWeight: 700,
-                fontSize: "1.1rem",
-                marginLeft: "0.5rem"
-              }}>Adedotun</Typography>
-            </Box>
+          <Toolbar>
             <div>
-              {isMobile ? (
-                <Box>
-                  <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="menu"
-                    onClick={toggleDrawer}>
-                    <Hamburger open={toggle} />
-                  </IconButton>
-                  <Drawer anchor="right" open={toggle} onClose={toggleDrawer}>
-                    <List
-                      style={{ width: "100vw" }}
-                      onClick={toggleDrawer}
-                      onKeyDown={toggleDrawer}
-                    >
-                      <Box style={{
-                        margin: "0.2rem 0.8rem",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center"
-                      }}>
-                        <img
-                          style={{ marginLeft: "1rem" }}
-                          className={classes.title}
-                          onClick={() => handleMenuClick('/')}
-                          src="/adedotun_logo.svg"
-                          alt="adedotun-logo"
-                        />
-                        <Close style={{ color: "#3A61E2", marginRight: "1rem" }} onClick={toggleDrawer} />
-                      </Box>
-                      {menuItems2.map((text, index) => {
-                        const { page, pageUrl } = text;
-                        return (
-                          <ListItem onClick={() => handleMenuClick(pageUrl)} button key={page}>
+              {isMobile && (
+                <Box className={classes.toolbar}>
+                  <Box style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      onClick={() => handleMenuClick('/')}
+                      className={classes.logoMobile}
+                      src="/assets/adedotun_logo.svg"
+                      alt="adedotun_logo"
+                    />
+                    <Typography style={{
+                      color: "#0062FF",
+                      fontWeight: 700, fontSize: "1.2rem"
+                    }}>
+                      Adedotun
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Button
+                      edge="start"
+                      className={classes.menuButton}
+                      color="inherit"
+                      aria-label="menu"
+                      onClick={toggleDrawer}>
+                      <Hamburger open={toggle} />
+                    </Button>
+                    <Drawer anchor="right" open={toggle} onClose={toggleDrawer}>
+                      <List
+                        style={{ width: "100vw", padding: " 1rem 0.5rem" }}
+                        onClick={toggleDrawer}
+                        onKeyDown={toggleDrawer}
+                      >
+                        <Box style={{
+                          margin: "0.2rem 0.8rem",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center"
+                        }}>
+                          <img
+                            onClick={() => handleMenuClick('/')}
+                            className={classes.logoMobile}
+                            src="/assets/adedotun_logo.svg"
+                            alt="adedotun_logo"
+                          />
+                          <Close style={{ color: "#3A61E2", marginRight: "1rem" }} onClick={toggleDrawer} />
+                        </Box>
+                        <Box style={{ margin: "3rem auto", width: "11rem" }}>
+                          <ListItem style={{ textAlign: "center" }} button>
                             <ListItemText>
-                              <Typography style={{ fontSize: "0.8rem" }}>{page}</Typography>
+                              <Typography className={classes.links}>Projects</Typography>
                             </ListItemText>
                           </ListItem>
-                        )
-                      })}
-                    </List>
-                  </Drawer>
-                </Box>
-              ) :
-                <>
-                  <Box>
-                    {menuItems2.map((menuItem, key) => {
-                      const { page, pageUrl } = menuItem;
-                      return (
-                        <Button className={classes.menuItems2} key={key} onClick={() => handleMenuClick(pageUrl)}>{page}</Button>
-                      )
-                    })}
-                    {signUp.map((Item, key) => {
-                      const { page, pageUrl } = Item;
-                      return (
-                        <Button className={classes.signUp} key={key} onClick={() => handleMenuClick(pageUrl)}>{page}</Button>
-                      )
-                    })}
+                          <ListItem style={{ textAlign: "center" }} button>
+                            <ListItemText>
+                              <Typography className={classes.links}>Capabilities</Typography>
+                            </ListItemText>
+                          </ListItem>
+                          <ListItem style={{ textAlign: "center" }} button>
+                            <ListItemText>
+                              <Typography style={{ color: "#0062FF" }} className={classes.links}>Contact</Typography>
+                            </ListItemText>
+                          </ListItem>
+                          <ListItem style={{
+                            marginTop: "1.5rem",
+                            borderRadius: "0.5rem",
+                            textAlign: "center",
+                            background: "linear-gradient(120deg, #1a9bfc, #0062FF)",
+                          }} button>
+                            <ListItemText>
+                              <Typography style={{ color: "#FFFFFF" }} className={classes.links}>Send a message</Typography>
+                            </ListItemText>
+                          </ListItem>
+                        </Box>
+                      </List>
+                    </Drawer>
                   </Box>
-                </>
+
+                </Box>
+              )
+              }
+              {isTabDesktop &&
+                <Box className={classes.toolbar}>
+                  <Box style={{ display: "flex", alignItems: "center" }}>
+                    <img
+                      onClick={() => handleMenuClick('/')}
+                      className={classes.logoMobile}
+                      src="/assets/adedotun_logo.svg"
+                      alt="adedotun_logo"
+                    />
+                    <Typography style={{
+                      color: "#0062FF",
+                      fontWeight: 700, fontSize: "1.2rem"
+                    }}>
+                      Adedotun Alausa
+                    </Typography>
+                  </Box>
+                  <Box>
+                    <Button className={classes.links}>
+                      Projects
+                    </Button>
+                    <Button className={classes.links}>
+                      Capabilities
+                    </Button>
+                    <Button style={{ color: "#0062FF" }} className={classes.links}>
+                      Contact
+                    </Button>
+                  </Box>
+                </Box>
               }
 
             </div>

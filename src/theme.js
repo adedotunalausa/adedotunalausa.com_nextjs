@@ -5,7 +5,8 @@ import { red } from '@material-ui/core/colors';
 const theme = createMuiTheme({
   typography: {
     fontFamily: [
-      'Montserrat',
+      'Poppins',
+      'Open Sans',
       'Inter',
       'Arial',
       '-apple-system',
