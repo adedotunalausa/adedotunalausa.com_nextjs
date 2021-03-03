@@ -19,7 +19,6 @@ const useStyles = makeStyles(() => ({
     position: "absolute",
     top: "20rem",
     width: "80%",
-    transform: "rotate(180deg)"
   },
 }))
 
@@ -46,7 +45,7 @@ const Home = () => {
         />
         <img src="/assets/background1.svg"
           className={classes.background2}
-          style={{ transform: `translateY(${offsetY * 0.8}px)` }}
+          style={{ transform: `translateY(${offsetY * 0.5}px)` }}
         />
         {/* <img src="/assets/background2.svg" className={classes.background} /> */}
         {/* <img src="/assets/circle-process-2.svg" className={classes.background} /> */}

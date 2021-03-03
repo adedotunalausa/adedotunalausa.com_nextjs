@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import {
-  AppBar,
   Toolbar,
-  IconButton,
   Divider,
   Box,
   Button,
@@ -19,7 +17,7 @@ import {
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useRouter } from 'next/router';
 import Hamburger from './Hamburger';
-import { FilledButton } from './Button'
+import AppBar from './AppBar';
 
 //CSS Styles
 
@@ -102,120 +100,118 @@ const header = () => {
   return (
     <React.Fragment>
       <div className={classes.root}>
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <div>
-              {isMobile && (
-                <Box className={classes.toolbar}>
-                  <Box style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      onClick={() => handleMenuClick('/')}
-                      className={classes.logoMobile}
-                      src="/assets/adedotun_logo.svg"
-                      alt="adedotun_logo"
-                    />
-                    <Typography style={{
-                      color: "#0062FF",
-                      fontWeight: 700, fontSize: "1.2rem"
-                    }}>
-                      Adedotun
+        <AppBar>
+          <div>
+            {isMobile && (
+              <Box className={classes.toolbar}>
+                <Box style={{ display: "flex", alignItems: "center" }}>
+                  <img
+                    onClick={() => handleMenuClick('/')}
+                    className={classes.logoMobile}
+                    src="/assets/adedotun_logo.svg"
+                    alt="adedotun_logo"
+                  />
+                  <Typography style={{
+                    color: "#0062FF",
+                    fontWeight: 700, fontSize: "1.2rem"
+                  }}>
+                    Adedotun
                     </Typography>
-                  </Box>
-                  <Box>
-                    <Button
-                      edge="start"
-                      className={classes.menuButton}
-                      color="inherit"
-                      aria-label="menu"
-                      onClick={toggleDrawer}>
-                      <Hamburger open={toggle} />
-                    </Button>
-                    <Drawer anchor="right" open={toggle} onClose={toggleDrawer}>
-                      <List
-                        style={{ width: "100vw", padding: " 1rem 0.5rem" }}
-                        onClick={toggleDrawer}
-                        onKeyDown={toggleDrawer}
-                      >
-                        <Box style={{
-                          margin: "0.2rem 0.8rem",
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center"
-                        }}>
-                          <img
-                            onClick={() => handleMenuClick('/')}
-                            className={classes.logoMobile}
-                            src="/assets/adedotun_logo.svg"
-                            alt="adedotun_logo"
-                          />
-                          <Close style={{ color: "#3A61E2", marginRight: "1rem" }} onClick={toggleDrawer} />
-                        </Box>
-                        <Box style={{ margin: "3rem auto", width: "11rem" }}>
-                          <ListItem style={{ textAlign: "center" }} button>
-                            <ListItemText>
-                              <Typography className={classes.links}>Projects</Typography>
-                            </ListItemText>
-                          </ListItem>
-                          <ListItem style={{ textAlign: "center" }} button>
-                            <ListItemText>
-                              <Typography className={classes.links}>Capabilities</Typography>
-                            </ListItemText>
-                          </ListItem>
-                          <ListItem style={{ textAlign: "center" }} button>
-                            <ListItemText>
-                              <Typography style={{ color: "#0062FF" }} className={classes.links}>Contact</Typography>
-                            </ListItemText>
-                          </ListItem>
-                          <ListItem style={{
-                            marginTop: "1.5rem",
-                            borderRadius: "0.5rem",
-                            textAlign: "center",
-                            background: "linear-gradient(120deg, #1a9bfc, #0062FF)",
-                          }} button>
-                            <ListItemText>
-                              <Typography style={{ color: "#FFFFFF" }} className={classes.links}>Send a message</Typography>
-                            </ListItemText>
-                          </ListItem>
-                        </Box>
-                      </List>
-                    </Drawer>
-                  </Box>
-
                 </Box>
-              )
-              }
-              {isTabDesktop &&
-                <Box className={classes.toolbar}>
-                  <Box style={{ display: "flex", alignItems: "center" }}>
-                    <img
-                      onClick={() => handleMenuClick('/')}
-                      className={classes.logoMobile}
-                      src="/assets/adedotun_logo.svg"
-                      alt="adedotun_logo"
-                    />
-                    <Typography style={{
-                      color: "#0062FF",
-                      fontWeight: 700, fontSize: "1.2rem"
-                    }}>
-                      Adedotun Alausa
+                <Box>
+                  <Button
+                    edge="start"
+                    className={classes.menuButton}
+                    color="inherit"
+                    aria-label="menu"
+                    onClick={toggleDrawer}>
+                    <Hamburger open={toggle} />
+                  </Button>
+                  <Drawer anchor="right" open={toggle} onClose={toggleDrawer}>
+                    <List
+                      style={{ width: "100vw", padding: " 1rem 0.5rem" }}
+                      onClick={toggleDrawer}
+                      onKeyDown={toggleDrawer}
+                    >
+                      <Box style={{
+                        margin: "0.2rem 0.8rem",
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center"
+                      }}>
+                        <img
+                          onClick={() => handleMenuClick('/')}
+                          className={classes.logoMobile}
+                          src="/assets/adedotun_logo.svg"
+                          alt="adedotun_logo"
+                        />
+                        <Close style={{ color: "#3A61E2", marginRight: "1rem" }} onClick={toggleDrawer} />
+                      </Box>
+                      <Box style={{ margin: "3rem auto", width: "11rem" }}>
+                        <ListItem style={{ textAlign: "center" }} button>
+                          <ListItemText>
+                            <Typography className={classes.links}>Projects</Typography>
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem style={{ textAlign: "center" }} button>
+                          <ListItemText>
+                            <Typography className={classes.links}>Capabilities</Typography>
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem style={{ textAlign: "center" }} button>
+                          <ListItemText>
+                            <Typography style={{ color: "#0062FF" }} className={classes.links}>Contact</Typography>
+                          </ListItemText>
+                        </ListItem>
+                        <ListItem style={{
+                          marginTop: "1.5rem",
+                          borderRadius: "0.5rem",
+                          textAlign: "center",
+                          background: "linear-gradient(120deg, #1a9bfc, #0062FF)",
+                        }} button>
+                          <ListItemText>
+                            <Typography style={{ color: "#FFFFFF" }} className={classes.links}>Send a message</Typography>
+                          </ListItemText>
+                        </ListItem>
+                      </Box>
+                    </List>
+                  </Drawer>
+                </Box>
+
+              </Box>
+            )
+            }
+            {isTabDesktop &&
+              <Box className={classes.toolbar}>
+                <Box style={{ display: "flex", alignItems: "center" }}>
+                  <img
+                    onClick={() => handleMenuClick('/')}
+                    className={classes.logoMobile}
+                    src="/assets/adedotun_logo.svg"
+                    alt="adedotun_logo"
+                  />
+                  <Typography style={{
+                    color: "#0062FF",
+                    fontWeight: 700, fontSize: "1.2rem"
+                  }}>
+                    Adedotun Alausa
                     </Typography>
-                  </Box>
-                  <Box>
-                    <Button className={classes.links}>
-                      Projects
-                    </Button>
-                    <Button className={classes.links}>
-                      Capabilities
-                    </Button>
-                    <Button style={{ color: "#0062FF" }} className={classes.links}>
-                      Contact
-                    </Button>
-                  </Box>
                 </Box>
-              }
+                <Box>
+                  <Button className={classes.links}>
+                    Projects
+                    </Button>
+                  <Button className={classes.links}>
+                    Capabilities
+                    </Button>
+                  <Button style={{ color: "#0062FF" }} className={classes.links}>
+                    Contact
+                    </Button>
+                </Box>
+              </Box>
+            }
 
-            </div>
-          </Toolbar>
+          </div>
         </AppBar>
       </div>
     </React.Fragment>
