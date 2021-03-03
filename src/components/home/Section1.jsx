@@ -22,13 +22,19 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "2rem",
     fontWeight: 300,
     color: "#0062FF",
-    margin: "0.5rem 0"
+    margin: "0.5rem 0",
+    [theme.breakpoints.up('md')]: {
+      fontSize: "2.8rem"
+    },
   },
   thickText: {
     fontSize: "1.6rem",
     fontWeight: 800,
     color: "#00083D",
-    margin: "0 0 2rem 0"
+    margin: "0 0 2rem 0",
+    [theme.breakpoints.up('md')]: {
+      fontSize: "3rem"
+    },
   },
   buttonWrapper: {
     display: "flex",
@@ -38,7 +44,10 @@ const useStyles = makeStyles((theme) => ({
     margin: "3rem 0"
   },
   image: {
-    width: "20rem"
+    width: "20rem",
+    [theme.breakpoints.up('md')]: {
+      marginLeft: "4rem"
+    },
   }
 }))
 
@@ -101,7 +110,7 @@ const Section1 = () => {
             <Fade ssrFadeout bottom>
               <Box className={classes.buttonWrapper}>
                 <FilledButton text="View my work" />
-                <UnfilledButton text="My About Me" />
+                <UnfilledButton text="More About Me" />
               </Box>
             </Fade>
           </Grid>

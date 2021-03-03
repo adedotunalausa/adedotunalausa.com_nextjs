@@ -8,8 +8,12 @@ const Container = styled.div`
   position: fixed;
   width: 100%;
   z-index: 20;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(30px);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 -1px 0 0 rgba(0, 0, 0, 0.08);
+
+  @media (min-width: 960px) {
+        padding: 1.2rem 5rem;
+    }
 `;
 
 const AppBar = ({ children }) => {

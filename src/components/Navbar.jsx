@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "1.9rem",
     fontSize: "1rem",
     textTransform: "Capitalize",
+    padding: "0 1rem",
     '& > *': {
       '&:hover': {
         color: "#0062FF"
@@ -200,13 +201,13 @@ const header = () => {
                 <Box>
                   <Button className={classes.links}>
                     Projects
-                    </Button>
+                  </Button>
                   <Button className={classes.links}>
                     Capabilities
-                    </Button>
+                  </Button>
                   <Button style={{ color: "#0062FF" }} className={classes.links}>
                     Contact
-                    </Button>
+                  </Button>
                 </Box>
               </Box>
             }

@@ -6,9 +6,15 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 
 // CSS Styles
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   body: {
-    padding: "7.5rem 2rem"
+    padding: "7.5rem 2rem",
+    [theme.breakpoints.up('sm')]: {
+      padding: "8.5rem 2rem",
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: "8.5rem 5rem",
+    },
   },
   background1: {
     position: "absolute",
