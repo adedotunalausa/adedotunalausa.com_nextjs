@@ -1,27 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
 
-const Container = styled.div`
-  background: rgba(255, 255, 255, 0.3);
-  padding: 1.2rem 2rem;
-  marginTop: 15rem;
-  position: fixed;
-  width: 100%;
-  z-index: 20;
-  backdrop-filter: blur(30px);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 -1px 0 0 rgba(0, 0, 0, 0.08);
-
-  @media (min-width: 960px) {
-        padding: 1.2rem 5rem;
-    }
-`;
-
-const AppBar = ({ children }) => {
+const AppBar = ({ children, getTheme }) => {
   return (
-    <Container>
-      {children}
-    </Container>
+    <>
+      {getTheme() &&
+        <div className="appbar-dark">
+          {children}
+        </div>
+      }
+
+      {!getTheme() &&
+        <div className="appbar-light">
+          {children}
+        </div>
+      }
+    </>
   )
 }
 
-export default AppBar; 
+export default AppBar;

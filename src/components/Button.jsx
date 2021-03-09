@@ -45,8 +45,7 @@ export const UnfilledButton = ({ text }) => {
   return (
     <>
       <Button className={classes.button2}>
-        <Typography className={classes.smallText} style={{
-          color: "#0062FF",
+        <Typography color="primary" className={classes.smallText} style={{
           fontWeight: 600,
           fontSize: "0.9rem",
           textTransform: "capitalize"

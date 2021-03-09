@@ -4,9 +4,6 @@ import styled from "styled-components"
 const StyledBurger = styled.div`
     width: 2rem;
     height: 2rem;
-    position: fixed;
-    top: 19px;
-    right: 32px;
     display: none;
 
     @media (max-width: 768px) {

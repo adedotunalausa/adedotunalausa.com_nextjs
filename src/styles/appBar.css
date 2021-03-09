@@ -1,0 +1,37 @@
+.appbar-dark {
+  background: rgba(35, 35, 35, 0.6);
+  padding: 0.9rem 2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 20;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 -1px 0 0 rgba(0, 0, 0, 0.08);
+}
+
+.appbar-light {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 0.9rem 2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 20;
+  backdrop-filter: blur(30px);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04), 0 -1px 0 0 rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 0px) {
+  .appbar-dark, .appbar-light {
+    padding: 1.2rem 1.5rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .appbar-dark, .appbar-light {
+    padding: 1.2rem 2rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .appbar-dark, .appbar-light {
+    padding: 1.2rem 5rem;
+  }
+}

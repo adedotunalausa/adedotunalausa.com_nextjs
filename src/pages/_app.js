@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
-import { ThemeProvider } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import theme from '../theme'
+import '../styles/appBar.css'
+
+import { StateProvider } from '../context/StateProviders'
+import reducer, { initialState } from '../context/reducer'
 
 const description = "I build digital products that meets the expectations of users, help businesses reach their goals and result in an awesome user interaction";
 const title = "Adedotun Alausa | Software Engineer";
@@ -50,11 +52,11 @@ export default function MyApp(props) {
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-col</meta>or" content="#ffffff" />
       </Head>
-      <ThemeProvider theme={theme}>
+      <StateProvider initialState={initialState} reducer={reducer}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <Component {...pageProps} />
-      </ThemeProvider>
+      </StateProvider>
     </React.Fragment>
   );
 }

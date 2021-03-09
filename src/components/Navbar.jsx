@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {
-  Toolbar,
-  Divider,
-  Box,
-  Button,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-} from '@material-ui/core';
-import {
-  Close,
-} from '@material-ui/icons';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+import Switch from '@material-ui/core/Switch';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Close from '@material-ui/icons/Close';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import Brightness2Icon from '@material-ui/icons/Brightness2';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useRouter } from 'next/router';
+
 import Hamburger from './Hamburger';
 import AppBar from './AppBar';
+import { useStateValue } from '../context/StateProviders'
 
 //CSS Styles
 
@@ -42,10 +43,11 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   menuButton: {
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(0),
   },
   toolbar: {
     display: "flex",
+    alignItems: "center",
     justifyContent: "space-between",
   },
   logoMobile: {
@@ -56,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
     width: "8rem"
   },
   links: {
-    color: "#5B6E80",
     fontWeight: 400,
     lineHeight: "1.9rem",
     fontSize: "1rem",
@@ -81,6 +82,59 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const IOSSwitch = withStyles((theme) => ({
+  root: {
+    width: 42,
+    height: 26,
+    padding: 0,
+    margin: theme.spacing(1),
+  },
+  switchBase: {
+    padding: 1,
+    '&$checked': {
+      transform: 'translateX(16px)',
+      color: theme.palette.common.white,
+      '& + $track': {
+        backgroundColor: '#4a5568',
+        opacity: 1,
+        border: 'none',
+      },
+    },
+    '&$focusVisible $thumb': {
+      color: '#EDEDED',
+      border: '6px solid #fff',
+    },
+  },
+  thumb: {
+    width: 24,
+    height: 24,
+  },
+  track: {
+    borderRadius: 26 / 2,
+    border: `none`,
+    backgroundColor: "#EDEDED",
+    opacity: 1,
+    transition: theme.transitions.create(['background-color', 'border']),
+  },
+  checked: {},
+  focusVisible: {},
+}))(({ classes, ...props }) => {
+  return (
+    <Switch
+      focusVisibleClassName={classes.focusVisible}
+      disableRipple
+      classes={{
+        root: classes.root,
+        switchBase: classes.switchBase,
+        thumb: classes.thumb,
+        track: classes.track,
+        checked: classes.checked,
+      }}
+      {...props}
+    />
+  );
+});
+
 const header = () => {
   const router = useRouter()
   const classes = useStyles();
@@ -89,6 +143,30 @@ const header = () => {
   const isTabDesktop = useMediaQuery(theme.breakpoints.up('sm'));
 
   const [toggle, setToggle] = useState(false)
+  const [{ themeState }, dispatch] = useStateValue();
+
+  const handleChange = (event) => {
+    dispatch({
+      type: 'SET_THEME',
+      value: event.target.checked
+    })
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('myTheme', event.target.checked)
+    }
+  };
+
+  const getTheme = () => {
+    if (typeof window === 'undefined') {
+      return false
+    }
+
+    if (localStorage.getItem('myTheme')) {
+      return JSON.parse(localStorage.getItem("myTheme"))
+    }
+
+    return themeState;
+  }
+
 
   const handleMenuClick = (pageUrl) => {
     router.push(pageUrl);
@@ -101,7 +179,7 @@ const header = () => {
   return (
     <React.Fragment>
       <div className={classes.root}>
-        <AppBar>
+        <AppBar getTheme={getTheme}>
           <div>
             {isMobile && (
               <Box className={classes.toolbar}>
@@ -109,25 +187,26 @@ const header = () => {
                   <img
                     onClick={() => handleMenuClick('/')}
                     className={classes.logoMobile}
-                    src="/assets/adedotun_logo.svg"
+                    src={getTheme() ? "/assets/adedotun_logo_light.svg" : "/assets/adedotun_logo.svg"}
                     alt="adedotun_logo"
                   />
-                  <Typography style={{
-                    color: "#0062FF",
+                  <Typography color="primary" style={{
                     fontWeight: 700, fontSize: "1.2rem"
                   }}>
                     Adedotun
-                    </Typography>
+                  </Typography>
                 </Box>
-                <Box>
-                  <Button
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="menu"
-                    onClick={toggleDrawer}>
-                    <Hamburger open={toggle} />
-                  </Button>
+                <Box style={{ display: "flex", alignItems: "center" }}>
+                  <FormGroup style={{ marginLeft: "2rem" }}>
+                    <FormControlLabel
+                      control={<IOSSwitch checked={getTheme()} onChange={handleChange} name="checkedA" />}
+                      label={getTheme() ? <Brightness2Icon color='primary' style={{ marginTop: "0.4rem", width: "1rem" }} />
+                        : <WbSunnyIcon color="secondary" style={{ marginTop: "0.4rem", width: "1rem" }} />}
+                    />
+                  </FormGroup>
+                  <Box aria-label="menu">
+                    <Hamburger onClick={toggleDrawer} open={toggle} />
+                  </Box>
                   <Drawer anchor="right" open={toggle} onClose={toggleDrawer}>
                     <List
                       style={{ width: "100vw", padding: " 1rem 0.5rem" }}
@@ -148,20 +227,20 @@ const header = () => {
                         />
                         <Close style={{ color: "#3A61E2", marginRight: "1rem" }} onClick={toggleDrawer} />
                       </Box>
-                      <Box style={{ margin: "3rem auto", width: "11rem" }}>
+                      <Box style={{ margin: "3rem auto", width: "12.5rem" }}>
                         <ListItem style={{ textAlign: "center" }} button>
                           <ListItemText>
-                            <Typography className={classes.links}>Projects</Typography>
+                            <Typography color="secondary" className={classes.links}>Projects</Typography>
                           </ListItemText>
                         </ListItem>
                         <ListItem style={{ textAlign: "center" }} button>
                           <ListItemText>
-                            <Typography className={classes.links}>Capabilities</Typography>
+                            <Typography color="secondary" className={classes.links}>Capabilities</Typography>
                           </ListItemText>
                         </ListItem>
                         <ListItem style={{ textAlign: "center" }} button>
                           <ListItemText>
-                            <Typography style={{ color: "#0062FF" }} className={classes.links}>Contact</Typography>
+                            <Typography color="primary" className={classes.links}>Contact</Typography>
                           </ListItemText>
                         </ListItem>
                         <ListItem style={{
@@ -178,7 +257,6 @@ const header = () => {
                     </List>
                   </Drawer>
                 </Box>
-
               </Box>
             )
             }
@@ -188,27 +266,31 @@ const header = () => {
                   <img
                     onClick={() => handleMenuClick('/')}
                     className={classes.logoMobile}
-                    src="/assets/adedotun_logo.svg"
+                    src={getTheme() ? "/assets/adedotun_logo_light.svg" : "/assets/adedotun_logo.svg"}
                     alt="adedotun_logo"
                   />
-                  <Typography style={{
-                    color: "#0062FF",
-                    fontWeight: 700, fontSize: "1.2rem"
-                  }}>
+                  <Typography color="primary" style={{ fontWeight: 700, fontSize: "1.2rem" }}>
                     Adedotun Alausa
-                    </Typography>
+                  </Typography>
                 </Box>
-                <Box>
-                  <Button className={classes.links}>
+                <Box style={{ display: "flex", alignItems: "center" }}>
+                  <Button color="secondary" className={classes.links}>
                     Projects
                   </Button>
-                  <Button className={classes.links}>
+                  <Button color="secondary" className={classes.links}>
                     Capabilities
                   </Button>
-                  <Button style={{ color: "#0062FF" }} className={classes.links}>
+                  <Button color="primary" className={classes.links}>
                     Contact
                   </Button>
                 </Box>
+                <FormGroup>
+                  <FormControlLabel
+                    control={<IOSSwitch checked={getTheme()} onChange={handleChange} name="checkedA" />}
+                    label={getTheme() ? <Brightness2Icon color="primary" style={{ marginTop: "0.4rem", width: "1rem" }} />
+                      : <WbSunnyIcon color="secondary" style={{ marginTop: "0.4rem", width: "1rem" }} />}
+                  />
+                </FormGroup>
               </Box>
             }
 

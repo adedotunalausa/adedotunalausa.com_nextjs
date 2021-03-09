@@ -9,11 +9,29 @@ import Fade from 'react-reveal/Fade';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
-  wrapper: {
-    // padding: "0 2rem 0 2rem"
+  wrapperLight: {
+    padding: "7.5rem 2rem",
+    [theme.breakpoints.up('xs')]: {
+      padding: "8.5rem 1.5rem",
+    },
+    [theme.breakpoints.up('sm')]: {
+      padding: "8.5rem 2rem",
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: "8.5rem 5rem",
+    },
   },
+  // wrapperDark: {
+  //   padding: "7.5rem 2rem",
+  //   background: "#000000",
+  //   [theme.breakpoints.up('sm')]: {
+  //     padding: "8.5rem 2rem",
+  //   },
+  //   [theme.breakpoints.up('md')]: {
+  //     padding: "8.5rem 5rem",
+  //   },
+  // },
   smallText: {
-    color: "#5B6E80",
     fontWeight: 400,
     lineHeight: "1.7rem",
     fontSize: "1rem"
@@ -21,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
   bigText: {
     fontSize: "2rem",
     fontWeight: 300,
-    color: "#0062FF",
     margin: "0.5rem 0",
     [theme.breakpoints.up('md')]: {
       fontSize: "2.8rem"
@@ -30,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
   thickText: {
     fontSize: "1.6rem",
     fontWeight: 800,
-    color: "#00083D",
     margin: "0 0 2rem 0",
     [theme.breakpoints.up('md')]: {
       fontSize: "3rem"
@@ -76,38 +92,30 @@ const Section1 = () => {
 
   return (
     <>
-      <Box className={classes.wrapper} >
+      <Box className={classes.wrapperLight}>
         <Grid container>
           <Grid item item xs={12} sm={6} md={6} lg={6} xl={6}>
-            <Fade ssrFadeout bottom>
-              <Typography className={classes.smallText}>
+            <Fade cascade ssrFadeout bottom>
+              <Typography color="secondary" className={classes.smallText}>
                 Hello, I'm Adedotun <span role="img" aria-label="wave">👋🏼</span>
               </Typography>
-            </Fade>
-            <Fade ssrFadeout bottom>
-              <Typography className={classes.bigText}>
+              <Typography color="primary" className={classes.bigText}
+              >
                 I build products
               </Typography>
-            </Fade>
-            <Fade ssrFadeout bottom>
-              <Box className={classes.thickText}>
+              <Box color="movingText.main" className={classes.thickText}>
                 <TextTransition
                   text={TEXTS[index % TEXTS.length]}
                   springConfig={presets.wobbly}
                   noOverflow={true}
                 />
               </Box>
-            </Fade>
-            <Box style={{ display: "flex", alignItems: "center" }}>
-              {/* <span style={{ width: "4rem", height: "100%", backgroundColor: "#0062FF" }}></span> */}
-              <Fade ssrFadeout bottom>
-                <Typography className={classes.smallText}>
+              <Box style={{ display: "flex", alignItems: "center" }}>
+                <Typography color="secondary" className={classes.smallText}>
                   Brilliant and experienced software engineer helping startups
                   & Fortune 500 companies develop scalable software solutions.
                 </Typography>
-              </Fade>
-            </Box>
-            <Fade ssrFadeout bottom>
+              </Box>
               <Box className={classes.buttonWrapper}>
                 <FilledButton text="View my work" />
                 <UnfilledButton text="More About Me" />
@@ -118,7 +126,7 @@ const Section1 = () => {
           <Grid item xs={12} sm={6} md={6} lg={6} xl={6}>
             {
               isMobile &&
-              <Fade ssrFadeout bottom>
+              <Fade ssrFadeout big>
                 <img className={classes.image}
                   src="/images/Adedotun2.png"
                   alt="adedotun" />
@@ -126,7 +134,7 @@ const Section1 = () => {
             }
             {
               isTabDesktop &&
-              <Fade ssrFadeout bottom>
+              <Fade ssrFadeout big>
                 <img className={classes.image}
                   src="/images/Adedotun11.png"
                   alt="adedotun" />
